@@ -1,0 +1,127 @@
+<html>
+<head>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes"/>       
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+
+// Step 1. Put the URL from <form action="URL"> here:
+var form_url = "https://docs.google.com/a/pagerduty.com/forms/d/1SKTJn_7mip2pBXp4a3o90epGD3t3dhSjDueYkbdXFZ4/formResponse"
+// Step 2. Put the name from <input type="radio" name="entry.123"> here:
+var radio_button_name = "entry.9714035"
+// Step 3. 
+
+clickon = function(e) {
+  me = $(e)
+  me.addClass( "clicked_on" )
+  window.setTimeout(function(who){$(who).removeClass( "clicked_on" )},800,me)
+  
+  form_data = {}
+  answers = ["Yum - Bring back ASAP","Keep in normal rotation","Yuck - Never again","Not enough food","More healthy","Too much dairy","More Paleo","Too many nuts"]
+  answer = answers[1*me[0].id]//hackiest code
+  console.log(answer)
+  form_data[radio_button_name]=answer
+  $.post( form_url, form_data, function( data ) {
+    console.log( data );
+  }).always(function() {
+    //$(e).removeClass( "clicked_on" )
+  });
+} //Answers: https://docs.google.com/a/pagerduty.com/spreadsheets/d/1TIJSLlV7Wh3pRXZfr3wJczO62boWv4ATHk_AViavaQo/edit#gid=1463699703
+</script>
+
+
+<style>
+@font-face {
+  font-family: 'Colfax';
+  src: url("ColfaxWebRegular.otf");
+  font-weight: lighter;
+  font-style: normal;  
+}
+* {
+  transition: all .5s ease;
+  text-align: center;
+  font-family: 'Colfax';
+  user-select:none;
+}
+.clicked_on { /* This block is basically me not getting CSS. It's all trial and error */
+transition: all 0s ease;
+  background-color:#47BA04 !important;
+  color: white !important;
+  margin-left: 10px !important;
+  margin-top: 10px !important;
+  margin-bottom: 0px !important;
+  margin-right: 0px !important;
+  box-shadow: 0px 0px 0px 0px rgba(87,95,107,1) !important;
+}
+.option {
+  text-align: left;
+  text-indent: 6em;
+  color: #1F293A;
+  border: 2px solid #47BA04;
+  background-color: #EDF8E8;
+  padding: 50px 30px;
+  
+  border-radius: 25px;
+  font-size: 20pt;
+  margin: 8px;
+  
+  box-shadow: 4px 4px 10px 1px rgba(87,95,107,1);
+  
+}
+
+
+.small {
+  display: inline;
+  font-size: 12pt;  
+  padding: 30px 20px;
+  width: 50pt;
+  
+}
+.smalloptions {
+  margin: 0px;
+  padding: 50px 0px;  
+}
+iframe {
+  width:100%;
+}
+h1 {
+  font-size: 40px;
+  padding:0;
+  margin:0;
+}
+.success {
+  zvisibility:hidden;
+  color: #EDF8E8;
+  zcolor: black;
+  font-size: 120%;
+}
+.clicked_on .success {
+  zvisibility:visible;
+    color: white;
+}
+</style>
+</head>
+<body>
+  <div style="width:80%; padding: 0 10%;">
+    <marquee behavior="alternate">
+      <h1>How was the food today?</h1>
+    </marquee>
+  </div>
+<!-- change these values to be the answers to your survey: -->
+<div id="0" class="option" ontouchstart="clickon(this)" onclick="clickon(this)">Yum - Bring back ASAP<span class="success">&nbsp;&nbsp;&nbsp; ✔ <i>Got it!</i></span></div>
+<div id="1" class="option" ontouchstart="clickon(this)">Keep in normal rotation<span class="success">&nbsp;&nbsp;&nbsp; ✔ <i>Got it!</i></span></div>
+<div id="2" class="option" ontouchstart="clickon(this)">Yuck - Never again<span class="success">&nbsp;&nbsp;&nbsp; ✔ <i>Got it!</i></span></div>
+<div id="3" class="option" ontouchstart="clickon(this)">Not enough food<span class="success">&nbsp;&nbsp;&nbsp; ✔ <i>Got it!</i></span></div>
+<div class="smalloptions">
+  <div class="small">Please more:</div>
+  <div id="4" class="option small" ontouchstart="clickon(this)" onclick="clickon(this)">healthy<span class="success"> ✔</span></div>
+  <div id="5" class="option small" ontouchstart="clickon(this)">non-dairy<span class="success"> ✔</span></div>
+  <div id="6" class="option small" ontouchstart="clickon(this)">paleo<span class="success"> ✔</span></div>
+  <div id="7" class="option small" ontouchstart="clickon(this)">nut-free<span class="success"> ✔</span></div>
+</div>
+
+<h1>More to say? Email sbrogan@pagerduty.com</h1>
+
+</body>
+</html>
